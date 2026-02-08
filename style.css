@@ -198,7 +198,7 @@ section > h3 {
 /* Hero section avec background image et overlay */
 .hero {
   position: relative;
-  background-image: url("images/workspace.jpg");
+ background-image: url("images/espace-de-travail.jpg");
   background-size: cover;
   background-position: center;
   min-height: 80vh;
