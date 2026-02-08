@@ -136,7 +136,10 @@ header {
   margin-bottom: calc(var(--spacing-unit) * 3);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000 !important;
+  width: 100%;
+  display: block !important;
+  visibility: visible !important;
 }
 
 header h1 {
@@ -209,6 +212,8 @@ section > h3 {
   margin-bottom: calc(var(--spacing-unit) * 5);
   margin-left: calc(var(--spacing-unit) * -2);
   margin-right: calc(var(--spacing-unit) * -2);
+  margin-top: 0;
+  z-index: 10;
 }
 
 .hero__overlay {
