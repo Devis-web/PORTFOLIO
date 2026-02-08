@@ -198,7 +198,7 @@ section > h3 {
 /* Hero section avec background image et overlay */
 .hero {
   position: relative;
- background-image: url("images/espace-de-travail.jpg");
+  background-image: url("images/workspace.jpg");
   background-size: cover;
   background-position: center;
   min-height: 80vh;
@@ -536,6 +536,8 @@ footer a {
   }
 
   header {
+    display: block;
+    visibility: visible;
     padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.5);
     margin-bottom: calc(var(--spacing-unit) * 2);
   }
@@ -611,6 +613,11 @@ footer a {
 
   h3 {
     font-size: 1.1rem;
+  }
+
+  header {
+    display: block;
+    visibility: visible;
   }
 
   nav ul {
