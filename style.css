@@ -179,6 +179,54 @@ nav a:focus {
   text-decoration: none;
 }
 
+/* Bouton hamburger (caché par défaut, affiché en mobile) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: calc(var(--spacing-unit) * 1);
+  color: var(--text-secondary);
+  z-index: 1001;
+  position: relative;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-secondary);
+  margin: 6px 0;
+  transition: var(--transition);
+  border-radius: 2px;
+}
+
+/* État du hamburger ouvert */
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: rotate(-45deg) translate(10px, -10px);
+}
+
+/* Navigation mobile (cachée par défaut) */
+nav.nav-open {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  max-height: 100vh;
+  overflow-y: auto;
+  z-index: 999;
+}
+
 /* ==========================================================================
    Main et Sections
    ========================================================================== */
@@ -201,7 +249,7 @@ section > h3 {
 /* Hero section avec background image et overlay */
 .hero {
   position: relative;
-  background-image: url("images/espace-de-travail.jpg");
+  background-image: url("images/workspace.jpg");
   background-size: cover;
   background-position: center;
   min-height: 80vh;
@@ -541,23 +589,51 @@ footer a {
   }
 
   header {
-    display: block;
-    visibility: visible;
+    display: flex !important;
+    visibility: visible !important;
+    justify-content: space-between;
+    align-items: flex-start;
     padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.5);
     margin-bottom: calc(var(--spacing-unit) * 2);
+    flex-wrap: wrap;
+    position: relative;
   }
 
   header h1 {
     font-size: 1.5rem;
+    flex: 1;
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
   }
 
   header p {
     font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .nav-toggle {
+    display: block;
+    order: -1;
+    margin-left: auto;
+    margin-bottom: calc(var(--spacing-unit) * 1);
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+    order: 3;
+  }
+
+  nav.nav-open {
+    display: block;
+    position: static;
+    background-color: transparent;
+    border-bottom: none;
   }
 
   nav ul {
     gap: calc(var(--spacing-unit) * 1);
     font-size: 0.9rem;
+    flex-direction: column;
   }
 
   nav a {
@@ -621,13 +697,25 @@ footer a {
   }
 
   header {
-    display: block;
-    visibility: visible;
+    display: flex !important;
+    visibility: visible !important;
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: block !important;
   }
 
   nav {
-    display: block !important;
-    visibility: visible !important;
+    display: none;
+    width: 100%;
+  }
+
+  nav.nav-open {
+    display: block;
+    position: static;
+    background-color: transparent;
+    border-bottom: none;
   }
 
   nav ul {

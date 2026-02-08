@@ -12,51 +12,51 @@
   
   function initMenuBurger() {
     const nav = document.querySelector('nav');
+    const menuToggle = document.querySelector('[data-menu-toggle]');
     
-    if (!nav) return;
+    if (!nav || !menuToggle) return;
 
-    // Fermer le menu au clic sur un lien de navigation
+    // Fonction pour fermer le menu
+    const closeMenu = () => {
+      nav.classList.remove('nav-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    // Fonction pour basculer le menu
+    const toggleMenu = (e) => {
+      e.stopPropagation();
+      const isOpen = nav.classList.contains('nav-open');
+      if (isOpen) {
+        closeMenu();
+      } else {
+        nav.classList.add('nav-open');
+        menuToggle.setAttribute('aria-expanded', 'true');
+      }
+    };
+
+    // Clic sur le bouton hamburger
+    menuToggle.addEventListener('click', toggleMenu);
+
+    // Fermer au clic sur un lien de navigation
     nav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', (e) => {
-        // Fermer la navigation
-        nav.classList.remove('nav-open');
-        const menuToggle = document.querySelector('[data-menu-toggle]');
-        if (menuToggle) {
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
+        closeMenu();
       });
     });
 
-    // Menu toggle button si présent
-    const menuToggle = document.querySelector('[data-menu-toggle]');
-    if (menuToggle) {
-      const toggleMenu = () => {
-        const isOpen = nav.classList.contains('nav-open');
-        nav.classList.toggle('nav-open');
-        menuToggle.setAttribute('aria-expanded', !isOpen);
-      };
+    // Fermer au clic en dehors du menu
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && e.target !== menuToggle && !menuToggle.contains(e.target)) {
+        closeMenu();
+      }
+    });
 
-      menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
-      });
-
-      // Fermer au clic extérieur
-      document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && e.target !== menuToggle) {
-          nav.classList.remove('nav-open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      // Fermer à la touche ESC
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
-          nav.classList.remove('nav-open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
+    // Fermer à la touche ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('nav-open')) {
+        closeMenu();
+      }
+    });
   }
 
   // ========================================================================
